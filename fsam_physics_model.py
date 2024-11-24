@@ -21,8 +21,8 @@ def calculate_equivalent_plastic_strain(feedstock_side_length, friction_force_ra
   numerator = feedstock_side_length**2 # initial cross section
   denominator = 2*np.pi*friction_force_radius*layer_thickness # extruded cross section
   # equivalent_plastic_strain = -np.log(numerator/denominator) # originally used in the paper but totally wrong?
+  if numerator/denominator < 1: raise ValueError('Initial cross section and final cross section ratio is less than 1, to maintain tool geometry lower the layer height.')
   equivalent_plastic_strain = 2*np.log(numerator/denominator) # from pg 253 in Tlusty's "Manufacturing Processes and Equipment"
-  # print(numerator/denominator)
   return equivalent_plastic_strain
 
 def calculate_velocity_gradient(friction_force_radius, spindle_speed, feed_velocity, phi):
