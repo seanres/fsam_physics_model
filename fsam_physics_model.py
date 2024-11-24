@@ -195,5 +195,3 @@ def calculate_normal_force(Area):
   F_z_required = flow_stress_refernce*Area
   return F_z_required
   
-  
-  
