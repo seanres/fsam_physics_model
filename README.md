@@ -1,3 +1,3 @@
 # fsam_physics_model
 
-Implementation of 10.1016/j.mfglet.2024.09.090 in python. Modify the parameters.py file according to your material and tool dimensions. Validation with the orginal paper is done in the fsam_model.ipynb file.
+Implementation of 10.1016/j.mfglet.2024.09.090 in python. Modify the parameters.py file according to your material and tool dimensions. Validation with the orginal paper is done in the fsam_model.ipynb file. Run main.py to estimate the tool rpm needed to deposite material at desired temperatures. To modify this for your own material or tool modify the values in the parameters.py file and the deposition temperature range (and corresponding temperature dependent thermal conductivity values).
