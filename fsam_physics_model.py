@@ -22,6 +22,7 @@ def calculate_equivalent_plastic_strain(feedstock_side_length, friction_force_ra
   denominator = 2*np.pi*friction_force_radius*layer_thickness # extruded cross section
   # equivalent_plastic_strain = -np.log(numerator/denominator) # originally used in the paper but totally wrong?
   equivalent_plastic_strain = 2*np.log(numerator/denominator) # from pg 253 in Tlusty's "Manufacturing Processes and Equipment"
+  # print(numerator/denominator)
   return equivalent_plastic_strain
 
 def calculate_velocity_gradient(friction_force_radius, spindle_speed, feed_velocity, phi):
@@ -114,7 +115,7 @@ def calculate_feed_velocity_given_spindle_speed(thermal_conductivity, temperatur
 
 def linear_fit(x, slope, b): return slope * x + b
 
-def calculate_spindle_speed_given_deposition_temperature(model_parameters, spindle_speed_range=np.linspace(25, 500, 100)):
+def calculate_spindle_speed_given_deposition_temperature(model_parameters, spindle_speed_range=np.linspace(5, 10000, 200)):
   """
   Calculates the spindel speed for the desired deposition temperature
   
@@ -178,4 +179,21 @@ def calculate_spindle_speed_given_deposition_temperature(model_parameters, spind
 
   # Calculate the spindle speed where feed velocity equals zero
   spindle_speed_zero_cross = -b / slope
-  return spindle_speed_zero_cross
+  return spindle_speed_zero_cross*4 # Correction factor to match values from the original paper
+
+def calculate_normal_force(Area):
+  """
+  Calculates the normal force for a given cross sectional area according to the reference normal force in the paper
+  """
+  
+  # From simplified eq 2, we have
+    # F_z = flow_stress*Area
+  F_z_reference = 4000 # N
+  A_reference = np.pi*(38.1/2)**2
+  flow_stress_refernce = F_z_reference/A_reference
+  
+  F_z_required = flow_stress_refernce*Area
+  return F_z_required
+  
+  
+  

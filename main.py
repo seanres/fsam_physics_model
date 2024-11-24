@@ -1,6 +1,0 @@
-from fsam_physics_model import calculate_spindle_speed_given_deposition_temperature
-from parameters import get_model_parameters
-
-model_parameters = get_model_parameters()
-
-calculate_spindle_speed_given_deposition_temperature(model_parameters)
